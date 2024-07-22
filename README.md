@@ -114,8 +114,8 @@ teamflect-fe-case/
 - Implementation of drag-and-drop functionality in the tree view.
 
 ## Submission
-- Fork this repository and complete the challenge.
-- Submit a pull request with your solution.
+- Fork this repository into your own account and complete the challenge.
+- Push your solution to the forked repository and send us the repository link.
 
 ## Bonus Points
 - Use of modern React features (e.g., hooks).
