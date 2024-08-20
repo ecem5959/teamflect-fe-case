@@ -1,11 +1,17 @@
 import React from "react";
+import { Routes, Route } from 'react-router-dom';
+import Home from './Pages/Home';
+import About from './Pages/About';
 
-const App = () =>{
-    return (
-        <h1>
-            Welcome to React App thats build using Webpack and Babel separately
-        </h1>
-    )
-}
+const App = () => {
+  return (
+    <>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+      </Routes>
+    </>
+  );
+};
 
-export default App
+export default App;
