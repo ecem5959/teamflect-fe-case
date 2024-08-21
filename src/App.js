@@ -1,15 +1,18 @@
 import React from "react";
 import { Routes, Route } from 'react-router-dom';
-import Home from './Pages/Home';
-import About from './Pages/About';
-
+import Home from './pages/Home/Home';
+import './styles/global.scss';
+import Layout from "./components/Layout/Layout";
+import Goals from './pages/Goals/Goals';
 const App = () => {
   return (
     <>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-      </Routes>
+        <Layout>
+            <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/goals" element={<Goals />} />
+            </Routes>
+        </Layout>
     </>
   );
 };
