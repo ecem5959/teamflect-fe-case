@@ -1,0 +1,80 @@
+.listItem{
+  background: #ffffff;
+  padding: 28px 20px 28px 32px;
+  border-radius: 4px;
+  box-shadow: 0 1px 6px 0 rgba(35, 48, 67, 0.1);
+  display: flex;
+  justify-content: space-between;
+
+  &Left{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    &Content{
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      img{
+        border-radius: 4px;
+        overflow: hidden;
+      }
+
+      span{
+        font-size: 15px;
+        font-weight: 500;
+        line-height: 20px;
+        color: #233043;
+      }
+    }
+  }
+
+  &Right{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    .date{
+      font-size: 12px;
+      line-height: 16px;
+      color: #606b79;
+    }
+
+    .progress{
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      span{
+        color: #606b79;
+        font-size: 12px;
+        line-height: 16px;
+      }
+
+      &Bar{
+        width: 52px;
+        height: 4px;
+        border-radius: 2px;
+        background: #eff1f5;
+        position: relative;
+      }
+
+      &Percent{
+        position: absolute;
+        background: #1053ff;
+        border-radius: 2px;
+        height: 4px;
+      }
+    }
+
+    .track{
+      font-size: 12px;
+      line-height: 16px;
+      color: #0c46d0;
+      background: #c1d3fe;
+      border-radius: 42px;
+      padding: 4px 9px;
+    }
+  }
+}

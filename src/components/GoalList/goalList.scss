@@ -1,0 +1,23 @@
+.goal{
+  &List{
+    width: 100%;
+    padding: 35px 30px;
+  }
+
+  &Header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+
+    h1{
+      font-size: 21px;
+      font-weight: 500;
+      line-height: 28px;
+    }
+  }
+
+  &Content{
+
+  }
+}

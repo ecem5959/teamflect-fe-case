@@ -33,6 +33,13 @@ module.exports={
                     "sass-loader",
                 ],
             },
+            {
+                test: /\.css$/i,  // .css dosyalarını işlemek için
+                use: [
+                    "style-loader",  // JS içinde CSS'i inject eder
+                    "css-loader"     // CSS dosyalarını işler
+                ],
+            },
         ]
     }
 }

@@ -1,0 +1,47 @@
+.date-input-wrapper {
+  display: flex;
+  align-items: center;  /* Label ve input'un aynı hizaya gelmesini sağlar */
+  font-family: 'YourProjectFont', sans-serif;
+}
+
+.date-label {
+  margin-right: 16px;  /* Label ile input arasına boşluk ekler */
+  font-size: 16px;
+  color: #4a5568;
+}
+
+.date-input-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: auto;  /* Input genişliğini otomatik yap */
+}
+
+.date-input {
+  padding: 8px 12px;
+  font-size: 16px;
+  border: 1px solid #cbd5e0;
+  border-radius: 4px;
+  outline: none;
+  color: #4a5568;
+  background-color: #fff;
+  font-family: inherit;
+  width: 200px;  /* Gerekirse genişliği sabitleyin */
+  appearance: none;
+  text-align: left;
+  padding-right: 36px; /* Sağda takvim ikonuna yer bırak */
+}
+
+.date-input::-webkit-calendar-picker-indicator {
+  opacity: 0; /* Varsayılan takvim ikonunu gizler */
+}
+
+.date-icon {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 16px;
+  color: #718096;
+  pointer-events: none; /* İkonun tıklanmasını engeller */
+}
