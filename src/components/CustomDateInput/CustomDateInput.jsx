@@ -7,17 +7,25 @@ import './customDateInput.scss';
 const CustomDateInput = ({ label }) => {
     const [startDate, setStartDate] = useState(null);
 
+    const formatDate = (date) => {
+        if (!date) return '';
+        return date.toLocaleDateString('en-GB', {
+            day: 'numeric',
+            month: 'short',
+            year: 'numeric'
+        }).replace(/ /g, ' ');
+    };
+
     return (
-        <div className="date-input-wrapper">
-            <label htmlFor="start-date" className="date-label">{label}</label>
-            <div className="date-input-container">
+        <div className="dateInputWrapper">
+            <div className="dateInputContainer">
                 <DatePicker
                     selected={startDate}
                     onChange={(date) => setStartDate(date)}
-                    dateFormat="dd.MM.yyyy"
-                    placeholderText="Start date"
-                    className="date-input"
-                    value={startDate ? startDate.toLocaleDateString('en-GB') : ''}
+                    dateFormat="d MMM yyyy"
+                    placeholderText={label}
+                    className="datePicker"
+                    value={formatDate(startDate)}
                 />
                 <Calendar />
             </div>

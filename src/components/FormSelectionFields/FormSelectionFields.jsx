@@ -26,7 +26,13 @@ const parentGoal = [
 const FormSelectionFields = () => {
     return <div className="selectionFields">
         <CustomSelect label="Goal owner" options={users} showImage/>
-        <CustomDateInput label="Start date"/>
+        <div className="dateField">
+            <label>Timeline</label>
+            <div className="container">
+                <CustomDateInput label="Start date"/>
+                <CustomDateInput label="End date"/>
+            </div>
+        </div>
         <CustomSelect label="Parent goal" options={parentGoal}/>
         <CustomSelect label="Progress" options={progress}/>
     </div>

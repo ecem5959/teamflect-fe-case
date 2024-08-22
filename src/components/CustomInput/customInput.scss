@@ -1,24 +1,24 @@
 .customInput {
   position: relative;
   width: 100%;
-}
 
-input[type="text"] {
-  width: 100%;
-  border: none;
-  border-bottom: 1px solid transparent;
-  outline: none;
-  padding: 8px 0;
-  font-size: 22px;
-  color: #313131;
-}
+  input[type="text"] {
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid transparent;
+    outline: none;
+    padding: 8px 0;
+    font-size: 22px;
+    color: #313131;
+  }
 
-input[type="text"]::placeholder {
-  color: #606b79;
-}
+  input[type="text"]::placeholder {
+    color: #606b79;
+  }
 
-input[type="text"]:focus {
-  border-bottom: 1px solid transparent;
+  input[type="text"]:focus {
+    border-bottom: 1px solid transparent;
+  }
 }
 
 .underline {

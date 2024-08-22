@@ -2,8 +2,17 @@ import './goalListItem.scss';
 import Organization from "../Icons/Organization";
 import Line from "../Icons/Line";
 import MoreAction from "../Icons/MoreAction";
+import Tooltip from "../Tooltip/Tooltip";
 
 const GoalListItem = () => {
+    const handleEdit = () => {
+        console.log('edit')
+    };
+
+    const handleDelete = () => {
+        console.log('delete')
+    };
+
     return <div className="listItem">
         <div className="listItemLeft">
             <Line />
@@ -22,7 +31,7 @@ const GoalListItem = () => {
                 </div>
             </div>
             <div className="track">On track</div>
-            <MoreAction />
+            <Tooltip icon={<MoreAction />} onEdit={handleEdit} onDelete={handleDelete} />
         </div>
     </div>
 }

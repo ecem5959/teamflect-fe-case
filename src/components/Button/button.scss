@@ -1,4 +1,4 @@
-button{
+.customButton{
   font-size: 16px;
   font-weight: 500;
   line-height: 24px;
@@ -6,7 +6,6 @@ button{
   padding: 8px 16px;
   border-radius: 4px;
   background: #1053ff;
-  border: none;
   cursor: pointer;
   transition: background 0.3s ease;
 
