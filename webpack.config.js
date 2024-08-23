@@ -1,4 +1,5 @@
 const path = require("path");
+const webpack = require("webpack");
 
 module.exports={
     mode: "development",
@@ -7,6 +8,11 @@ module.exports={
         path: path.resolve(__dirname, "public"),
         filename: "main.js"
     },
+    plugins:[
+        new webpack.DefinePlugin({
+            process: {env: {}}
+        })
+    ],
     target: "web",
     devServer: {
         port: "9500",
@@ -34,10 +40,10 @@ module.exports={
                 ],
             },
             {
-                test: /\.css$/i,  // .css dosyalarını işlemek için
+                test: /\.css$/i,
                 use: [
-                    "style-loader",  // JS içinde CSS'i inject eder
-                    "css-loader"     // CSS dosyalarını işler
+                    "style-loader",
+                    "css-loader"
                 ],
             },
         ]

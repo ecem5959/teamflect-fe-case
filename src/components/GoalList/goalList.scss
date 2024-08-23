@@ -1,6 +1,6 @@
 .goal{
   &List{
-    width: 100%;
+    width: calc(100% - 236px);
     padding: 35px 30px;
   }
 
@@ -18,6 +18,61 @@
   }
 
   &Content{
+    .tabBody{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px 0;
 
+      & > div {
+        width: 100%;
+      }
+
+      .droppableContainer{
+        display: flex;
+        width: 100%;
+        justify-content: center;
+      }
+
+      .parentTreeData{
+        display: flex;
+        width: 100%;
+        justify-content: center;
+      }
+
+      .treeItem{
+        display: flex;
+        width: 100%;
+        justify-content: center;
+
+        & > div {
+          background: #ffffff;
+          padding: 21px 26px;
+          border-radius: 4px;
+          box-shadow: 0 1px 6px 0 rgba(35, 48, 67, 0.1);
+          display: flex;
+          flex: 0 0 312px;
+          flex-direction: column;
+          gap: 8px;
+          position: relative;
+        }
+      }
+
+      .childTreeData{
+        display: flex;
+        padding: 60px 0;
+        gap: 20px;
+        width: 100%;
+        //flex-wrap: wrap;
+      }
+    }
+
+    .divider{
+      height: 1px;
+      background: black;
+      width: 100%;
+      margin: 20px 0;
+      opacity: 0.2;
+    }
   }
 }
