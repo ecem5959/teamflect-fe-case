@@ -1,4 +1,4 @@
-.inputFields{
+.inputFields {
   width: 100%;
   background: #ffffff;
   border-radius: 4px;
@@ -8,19 +8,19 @@
   flex-direction: column;
   gap: 16px;
 
-  &Header{
+  &Header {
     display: flex;
     align-items: center;
     gap: 16px;
   }
 
-  &Container{
+  &Container {
     display: flex;
     flex-direction: column;
     gap: 16px;
   }
 
-  &Title{
+  &Title {
     font-size: 12px;
     line-height: 16px;
     letter-spacing: 0.2px;

@@ -1,5 +1,5 @@
-.modal{
-  &Overlay{
+.modal {
+  &Overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -12,18 +12,20 @@
     opacity: 0;
     transition: opacity 0.3s ease;
 
-    &.show{
+    &.show {
       opacity: 1;
     }
   }
 
-  &Container{
+  &Container {
     background: #fff;
     width: 100%;
     height: 100%;
     position: relative;
     transform: translateY(50px);
-    transition: transform 0.3s ease, opacity 0.3s ease;
+    transition:
+      transform 0.3s ease,
+      opacity 0.3s ease;
     opacity: 0;
 
     &.open {
@@ -32,19 +34,19 @@
     }
   }
 
-  &Header{
+  &Header {
     display: flex;
     justify-content: space-between;
     border-bottom: 1px solid #eff1f5;
     padding: 14px 16px;
 
-    &Left{
+    &Left {
       display: flex;
       align-items: center;
     }
   }
 
-  &Title{
+  &Title {
     font-size: 18px;
     font-weight: 600;
     line-height: 22px;
@@ -54,7 +56,7 @@
     margin-left: 15px;
   }
 
-  &Footer{
+  &Footer {
     position: fixed;
     bottom: 0;
     padding: 16px;
@@ -65,7 +67,7 @@
     background: #ffffff;
   }
 
-  &Content{
+  &Content {
     background-color: #f8f8f8;
     height: 100%;
     padding: 30px 150px;

@@ -1,7 +1,7 @@
-import GoalList from "../../components/GoalList/GoalList";
+import GoalList from '../../components/GoalList/GoalList';
 
 const Goals = () => {
-    return <GoalList />
-}
+  return <GoalList />;
+};
 
 export default Goals;

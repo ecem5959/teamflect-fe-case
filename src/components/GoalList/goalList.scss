@@ -1,24 +1,24 @@
-.goal{
-  &List{
+.goal {
+  &List {
     width: calc(100% - 236px);
     padding: 35px 30px;
   }
 
-  &Header{
+  &Header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 30px;
 
-    h1{
+    h1 {
       font-size: 21px;
       font-weight: 500;
       line-height: 28px;
     }
   }
 
-  &Content{
-    .tabBody{
+  &Content {
+    .tabBody {
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -28,19 +28,19 @@
         width: 100%;
       }
 
-      .droppableContainer{
+      .droppableContainer {
         display: flex;
         width: 100%;
         justify-content: center;
       }
 
-      .parentTreeData{
+      .parentTreeData {
         display: flex;
         width: 100%;
         justify-content: center;
       }
 
-      .treeItem{
+      .treeItem {
         display: flex;
         width: 100%;
         justify-content: center;
@@ -58,7 +58,7 @@
         }
       }
 
-      .childTreeData{
+      .childTreeData {
         display: flex;
         padding: 60px 0;
         gap: 20px;
@@ -67,7 +67,7 @@
       }
     }
 
-    .divider{
+    .divider {
       height: 1px;
       background: black;
       width: 100%;

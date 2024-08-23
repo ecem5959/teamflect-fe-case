@@ -1,21 +1,21 @@
-.dateInput{
-  &Wrapper{
+.dateInput {
+  &Wrapper {
     display: flex;
     align-items: center;
   }
 
-  &Container{
+  &Container {
     position: relative;
     display: flex;
     align-items: center;
     width: auto;
 
-    svg{
+    svg {
       position: absolute;
       right: 0;
     }
 
-    .datePicker{
+    .datePicker {
       font-size: 14px;
       line-height: 17px;
       outline: none;

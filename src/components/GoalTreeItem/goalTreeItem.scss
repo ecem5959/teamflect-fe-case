@@ -1,15 +1,15 @@
-.treeItem{
-  &Header{
+.treeItem {
+  &Header {
     display: flex;
     align-items: center;
     justify-content: space-between;
 
-    &Left{
+    &Left {
       display: flex;
       gap: 8px;
       align-items: center;
 
-      .title{
+      .title {
         font-size: 12px;
         line-height: 16px;
         letter-spacing: 0.2px;
@@ -17,12 +17,12 @@
       }
     }
 
-    &Right{
+    &Right {
       display: flex;
       align-items: center;
       gap: 8px;
 
-      .progress{
+      .progress {
         font-size: 12px;
         line-height: 16px;
         color: #0c46d0;
@@ -33,30 +33,30 @@
     }
   }
 
-  &Content{
+  &Content {
     font-size: 15px;
     font-weight: 500;
     line-height: 20px;
   }
 
-  &Bottom{
+  &Bottom {
     display: flex;
     justify-content: space-between;
     align-items: center;
 
-    .date{
+    .date {
       font-size: 12px;
       line-height: 16px;
       color: #606b79;
     }
 
-    img{
+    img {
       border-radius: 4px;
       overflow: hidden;
     }
   }
 
-  &Button{
+  &Button {
     position: absolute;
     bottom: -12px;
     left: 46%;

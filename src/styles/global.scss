@@ -11,12 +11,20 @@ body {
 }
 
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-family:
+    'Inter',
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Roboto,
+    'Helvetica Neue',
+    Arial,
+    sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-.wrapper{
+.wrapper {
   min-height: 100vh;
 }
 
@@ -33,9 +41,9 @@ b {
   cursor: default;
 }
 
-button{
+button {
   border: none;
   background: transparent;
   line-height: 0;
-  cursor: pointer
+  cursor: pointer;
 }

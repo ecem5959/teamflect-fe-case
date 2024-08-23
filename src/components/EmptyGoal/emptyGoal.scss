@@ -1,4 +1,4 @@
-.emptyGoal{
+.emptyGoal {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -7,17 +7,17 @@
   color: #444691;
   gap: 4px;
 
-  h1{
+  h1 {
     font-size: 20px;
     line-height: 28px;
   }
 
-  &Text{
+  &Text {
     font-size: 14px;
     line-height: 20px;
   }
 
-  &SubText{
+  &SubText {
     font-size: 12px;
     line-height: 16px;
   }

@@ -1,0 +1,13 @@
+{
+  "arrowParens": "always",
+  "semi": true,
+  "singleQuote": true,
+  "jsxSingleQuote": false,
+  "quoteProps": "as-needed",
+  "trailingComma": "all",
+  "proseWrap": "always",
+  "insertPragma": false,
+  "requirePragma": false,
+  "tabWidth": 2,
+  "useTabs": false
+}

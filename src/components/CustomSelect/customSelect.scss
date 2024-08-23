@@ -1,9 +1,9 @@
-.customSelect{
-  &Wrapper{
+.customSelect {
+  &Wrapper {
     width: 50%;
   }
 
-  &Label{
+  &Label {
     font-size: 17px;
     font-weight: 500;
     line-height: 24px;
@@ -12,13 +12,14 @@
     margin-bottom: 10px;
   }
 
-  &Header{
+  &Header {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 6px 16px;
 
-    .selected, .selectPlaceholder {
+    .selected,
+    .selectPlaceholder {
       display: flex;
       align-items: center;
       font-size: 16px;
@@ -62,7 +63,7 @@
   z-index: 1000;
   scrollbar-width: none;
 
-  &::-webkit-scrollbar{
+  &::-webkit-scrollbar {
     display: none;
   }
 
@@ -73,7 +74,7 @@
     cursor: pointer;
     transition: background-color 0.2s;
 
-    span{
+    span {
       font-size: 16px;
       font-weight: 500;
       line-height: 24px;

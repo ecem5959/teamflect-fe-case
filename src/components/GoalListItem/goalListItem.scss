@@ -1,4 +1,4 @@
-.listItem{
+.listItem {
   background: #ffffff;
   padding: 28px 20px 28px 32px;
   border-radius: 4px;
@@ -6,22 +6,22 @@
   display: flex;
   justify-content: space-between;
 
-  &Left{
+  &Left {
     display: flex;
     align-items: center;
     gap: 20px;
 
-    &Content{
+    &Content {
       display: flex;
       align-items: center;
       gap: 8px;
 
-      img{
+      img {
         border-radius: 4px;
         overflow: hidden;
       }
 
-      span{
+      span {
         font-size: 15px;
         font-weight: 500;
         line-height: 20px;
@@ -30,29 +30,29 @@
     }
   }
 
-  &Right{
+  &Right {
     display: flex;
     align-items: center;
     gap: 20px;
 
-    .date{
+    .date {
       font-size: 12px;
       line-height: 16px;
       color: #606b79;
     }
 
-    .progress{
+    .progress {
       display: flex;
       align-items: center;
       gap: 8px;
 
-      span{
+      span {
         color: #606b79;
         font-size: 12px;
         line-height: 16px;
       }
 
-      &Bar{
+      &Bar {
         width: 52px;
         height: 4px;
         border-radius: 2px;
@@ -60,7 +60,7 @@
         position: relative;
       }
 
-      &Percent{
+      &Percent {
         position: absolute;
         background: #1053ff;
         border-radius: 2px;
@@ -68,7 +68,7 @@
       }
     }
 
-    .track{
+    .track {
       font-size: 12px;
       line-height: 16px;
       color: #0c46d0;
