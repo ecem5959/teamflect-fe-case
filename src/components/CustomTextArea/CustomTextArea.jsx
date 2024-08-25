@@ -1,9 +1,18 @@
 import './customTextArea.scss';
 
-const CustomTextArea = () => {
+const CustomTextArea = ({ value, onChange }) => {
+  const handleChange = (e) => {
+    onChange(e.target.value);
+  };
+
   return (
     <div className="customTextArea">
-      <textarea id="description" placeholder="Add a description" />
+      <textarea
+        id="description"
+        placeholder="Add a description"
+        value={value}
+        onChange={handleChange}
+      />
     </div>
   );
 };

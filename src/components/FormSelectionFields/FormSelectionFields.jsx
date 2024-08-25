@@ -1,39 +1,54 @@
 import './formSelectionFields.scss';
 import CustomSelect from '../CustomSelect/CustomSelect';
 import CustomDateInput from '../CustomDateInput/CustomDateInput';
-
-const users = [
-  { id: 1, name: 'Adele Vance', avatar: '/public/mock-image.png' },
-  { id: 2, name: 'Alex Wilber', avatar: '/public/mock-image.png' },
-  { id: 3, name: 'Patti Fernandes', avatar: '/public/mock-image.png' },
-  { id: 4, name: 'Grady Archie', avatar: '/public/mock-image.png' },
-  { id: 5, name: 'Isaiah Langer', avatar: '/public/mock-image.png' },
-  { id: 6, name: 'Isaiah Langer', avatar: '/public/mock-image.png' },
-  { id: 7, name: 'Isaiah Langer', avatar: '/public/mock-image.png' },
-];
+import { UserContext } from '../../contexts/UserContext';
+import { useContext } from 'react';
+import { GoalContext } from '../../contexts/GoalContext';
+import { useFormContext } from '../../contexts/FormContext';
 
 const progress = [
-  { id: 11, name: '%30' },
-  { id: 21, name: '%50' },
-  { id: 31, name: '%70' },
+  { id: 11, displayName: '%30' },
+  { id: 21, displayName: '%50' },
+  { id: 31, displayName: '%70' },
 ];
 
-const parentGoal = [
-  { id: 110, name: 'Improve Efficiency' },
-  { id: 210, name: 'Improve Efficiency' },
-];
 const FormSelectionFields = () => {
+  const { formData, handleInputChange } = useFormContext();
+  const { users } = useContext(UserContext);
+  const { goals } = useContext(GoalContext);
+
+  const parentGoals = goals.filter((goal) => !goal.parentId);
+
   return (
     <div className="selectionFields">
-      <CustomSelect label="Goal owner" options={users} showImage />
+      <CustomSelect
+        label="Goal owner"
+        options={users}
+        showImage
+        onChange={(value) => handleInputChange('ownerId', value.id)}
+        value={formData.ownerId || ''}
+      />
       <div className="dateField">
-        <label>Timeline</label>
+        <span>Timeline</span>
         <div className="container">
-          <CustomDateInput label="Start date" />
-          <CustomDateInput label="End date" />
+          <CustomDateInput
+            label="Start date"
+            onChange={(value) => handleInputChange('startDate', value)}
+            value={formData.startDate || ''}
+          />
+          <CustomDateInput
+            label="End date"
+            onChange={(value) => handleInputChange('endDate', value)}
+            value={formData.endDate || ''}
+          />
         </div>
       </div>
-      <CustomSelect label="Parent goal" options={parentGoal} />
+      <CustomSelect
+        label="Parent goal"
+        options={parentGoals}
+        onChange={(value) => handleInputChange('parentId', value.id)}
+        value={formData.parentId || ''}
+      />
       <CustomSelect label="Progress" options={progress} />
     </div>
   );

@@ -1,10 +1,20 @@
 import './customInput.scss';
 
-const CustomInput = () => {
+const CustomInput = ({ onChange, value }) => {
+  const handleChange = (e) => {
+    onChange(e.target.value);
+  };
+
   return (
     <div className="customInput">
-      <input type="text" id="goal-title" placeholder="Add goal title" />
-      <div className="underline"></div>
+      <input
+        type="text"
+        id="goal-title"
+        placeholder="Add goal title"
+        value={value}
+        onChange={handleChange}
+      />
+      <div className="underline" />
     </div>
   );
 };

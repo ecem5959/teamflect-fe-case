@@ -38,6 +38,13 @@
         display: flex;
         width: 100%;
         justify-content: center;
+        position: relative;
+
+        .treeItemButton{
+          position: absolute;
+          bottom: -12px;
+          left: 49.2%;
+        }
       }
 
       .treeItem {
@@ -63,16 +70,7 @@
         padding: 60px 0;
         gap: 20px;
         width: 100%;
-        //flex-wrap: wrap;
       }
-    }
-
-    .divider {
-      height: 1px;
-      background: black;
-      width: 100%;
-      margin: 20px 0;
-      opacity: 0.2;
     }
   }
 }

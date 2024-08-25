@@ -6,17 +6,26 @@ import Layout from './components/Layout/Layout';
 import Goals from './pages/Goals/Goals';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
+import { UserProvider } from './contexts/UserContext';
+import { GoalProvider } from './contexts/GoalContext';
+import { FormProvider } from './contexts/FormContext';
 
 const App = () => {
   return (
-    <DndProvider backend={HTML5Backend}>
-      <Layout>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/goals" element={<Goals />} />
-        </Routes>
-      </Layout>
-    </DndProvider>
+    <FormProvider>
+      <GoalProvider>
+        <UserProvider>
+          <DndProvider backend={HTML5Backend}>
+            <Layout>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/goals" element={<Goals />} />
+              </Routes>
+            </Layout>
+          </DndProvider>
+        </UserProvider>
+      </GoalProvider>
+    </FormProvider>
   );
 };
 

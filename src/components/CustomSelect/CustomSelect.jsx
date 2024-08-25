@@ -2,16 +2,22 @@ import { useState } from 'react';
 import Arrow from '../Icons/Arrow';
 import './customSelect.scss';
 
-const CustomSelect = ({ label, options, showImage = false }) => {
+const CustomSelect = ({
+  label,
+  options,
+  showImage = false,
+  onChange,
+  value,
+}) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState(null);
-
+  const [selectedOption, setSelectedOption] = useState(value);
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
 
-  const handleSelect = (user) => {
-    setSelectedOption(user);
+  const handleSelect = (option) => {
+    onChange(option);
+    setSelectedOption(option);
     setIsOpen(false);
   };
 
@@ -25,16 +31,16 @@ const CustomSelect = ({ label, options, showImage = false }) => {
         <div className="customSelectHeader">
           {selectedOption ? (
             <div className="selected">
-              {showImage && selectedOption.avatar && (
+              {showImage && selectedOption.img && (
                 <img
-                  src={selectedOption.avatar}
-                  alt={selectedOption.name}
+                  src={selectedOption.img}
+                  alt={selectedOption.displayName}
                   className="selectedImg"
                   width={24}
                   height={24}
                 />
               )}
-              <span>{selectedOption.name}</span>
+              <span>{selectedOption.displayName || selectedOption.title}</span>
             </div>
           ) : (
             <span className="selectPlaceholder">Select</span>
@@ -44,21 +50,22 @@ const CustomSelect = ({ label, options, showImage = false }) => {
         {isOpen && (
           <ul className="optionList">
             {options.map((option) => (
-              <li
-                key={option.id}
-                className="optionListItem"
-                onClick={() => handleSelect(option)}
-              >
-                {showImage && option.avatar && (
-                  <img
-                    src={option.avatar}
-                    alt={option.name}
-                    className="optionImg"
-                    width={24}
-                    height={24}
-                  />
-                )}
-                <span>{option.name}</span>
+              <li key={option.id}>
+                <button
+                  className="optionListItem"
+                  onClick={() => handleSelect(option)}
+                >
+                  {showImage && option.img && (
+                    <img
+                      src={option.img}
+                      alt={option.displayName}
+                      className="optionImg"
+                      width={24}
+                      height={24}
+                    />
+                  )}
+                  <span>{option.displayName || option.title}</span>
+                </button>
               </li>
             ))}
           </ul>

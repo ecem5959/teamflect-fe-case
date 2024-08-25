@@ -2,8 +2,11 @@ import './formInputFields.scss';
 import Organization from '../Icons/Organization';
 import CustomInput from '../CustomInput/CustomInput';
 import CustomTextArea from '../CustomTextArea/CustomTextArea';
+import { useFormContext } from '../../contexts/FormContext';
 
 const FormInputFields = () => {
+  const { formData, handleInputChange } = useFormContext();
+
   return (
     <div className="inputFields">
       <div className="inputFieldsHeader">
@@ -11,8 +14,14 @@ const FormInputFields = () => {
         <div className="inputFieldsTitle">ORGANIZATIONAL GOAL TITLE</div>
       </div>
       <div className="inputFieldsContainer">
-        <CustomInput />
-        <CustomTextArea />
+        <CustomInput
+          value={formData.title || ''}
+          onChange={(value) => handleInputChange('title', value)}
+        />
+        <CustomTextArea
+          value={formData.description || ''}
+          onChange={(value) => handleInputChange('description', value)}
+        />
       </div>
     </div>
   );

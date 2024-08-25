@@ -11,6 +11,10 @@
     align-items: center;
     gap: 20px;
 
+    &.hasChildren{
+      padding-left: 40px;
+    }
+
     &Content {
       display: flex;
       align-items: center;

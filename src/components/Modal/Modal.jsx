@@ -5,7 +5,7 @@ import Button from '../Button/Button';
 import useModalAnimation from '../../hooks/useModalAnimation';
 import './modal.scss';
 
-const Modal = ({ isOpen, onClose, children, title, buttonText }) => {
+const Modal = ({ isOpen, closeModal, modalContent, buttonAction }) => {
   const isVisible = useModalAnimation(isOpen);
 
   if (!isVisible) return null;
@@ -15,18 +15,21 @@ const Modal = ({ isOpen, onClose, children, title, buttonText }) => {
       <div className="modalContainer">
         <div className="modalHeader">
           <div className="modalHeaderLeft">
-            <button className="modalBack" onClick={onClose}>
+            <button className="modalBack" onClick={closeModal}>
               <Back />
             </button>
-            <div className="modalTitle">{title}</div>
+            <div className="modalTitle">{modalContent?.title}</div>
           </div>
-          <button className="modalClose" onClick={onClose}>
+          <button className="modalClose" onClick={closeModal}>
             <Close />
           </button>
         </div>
-        <div className="modalContent">{children}</div>
+        <div className="modalContent">{modalContent?.children}</div>
         <div className="modalFooter">
-          <Button text={buttonText} />
+          <Button
+            text={modalContent?.buttonText}
+            onClick={() => buttonAction()}
+          />
         </div>
       </div>
     </div>,

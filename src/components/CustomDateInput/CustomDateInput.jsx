@@ -1,12 +1,14 @@
-import { useState } from 'react';
 import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
 import Calendar from '../Icons/Calendar';
+import 'react-datepicker/dist/react-datepicker.css';
 import './customDateInput.scss';
+import { useEffect, useState } from 'react';
 
-const CustomDateInput = ({ label }) => {
-  const [startDate, setStartDate] = useState(null);
-
+const CustomDateInput = ({ label, onChange, value }) => {
+  useEffect(() => {
+    console.log('value', value);
+  }, [value]);
+  const [selectedDate, setSelectedDate] = useState(null);
   const formatDate = (date) => {
     if (!date) return '';
     return date
@@ -18,16 +20,33 @@ const CustomDateInput = ({ label }) => {
       .replace(/ /g, ' ');
   };
 
+  useEffect(() => {
+    console.log('selectedDate', selectedDate);
+  }, [selectedDate]);
+
+  /* const formatDateV2 = (
+    dateString,
+    locale = 'en-US',
+    options = { day: 'numeric', month: 'short', year: 'numeric' },
+  ) => {
+    const date = new Date(dateString);
+    return new Intl.DateTimeFormat(locale, options).format(date);
+  }; */
+
   return (
     <div className="dateInputWrapper">
       <div className="dateInputContainer">
         <DatePicker
-          selected={startDate}
-          onChange={(date) => setStartDate(date)}
+          selected={selectedDate}
+          onChange={(date) => {
+            const formattedDate = new Date(date).toISOString().slice(0, 10);
+            setSelectedDate(date);
+            onChange(formattedDate);
+          }}
           dateFormat="d MMM yyyy"
           placeholderText={label}
           className="datePicker"
-          value={formatDate(startDate)}
+          value={formatDate(selectedDate)}
         />
         <Calendar />
       </div>

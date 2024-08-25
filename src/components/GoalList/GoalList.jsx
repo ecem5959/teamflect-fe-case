@@ -1,20 +1,68 @@
 import Button from '../Button/Button';
 import Tabs from '../Tabs/Tabs';
-import Modal from '../Modal/Modal';
 import './goalList.scss';
 import { useEffect, useState } from 'react';
-import FormInputFields from '../FormInputFields/FormInputFields';
-import FormSelectionFields from '../FormSelectionFields/FormSelectionFields';
-import { getData, putData } from '../../services/fetch';
+import { getData, postData, putData } from '../../services/fetch';
 import { ArcherContainer, ArcherElement } from 'react-archer';
 import {
   DraggableGoalTreeItem,
   DroppableContainer,
 } from '../DragAndDrop/DragAndDrop';
+import Divider from '../Divider/Divider';
+import GoalListItem from '../GoalListItem/GoalListItem';
+import Expand from '../Icons/Expand';
+import Collapse from '../Icons/Collapse';
+import GoalForm from '../GoalForm/GoalForm';
+import { useFormContext } from '../../contexts/FormContext';
+import Modal from '../Modal/Modal';
 
 const GoalList = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [treeData, setTreeData] = useState([]);
+  const [activeTab, setActiveTab] = useState('Tree');
+  const [visibleIndex, setVisibleIndex] = useState(null);
+  const { formData } = useFormContext();
+  const [isOpenModal, setIsOpenModal] = useState(false);
+
+  const toggleChildVisibility = (index) => {
+    setVisibleIndex(visibleIndex === index ? null : index);
+  };
+
+  const submitFormData = () => {
+    postData('goals', formData).then(() => {
+      getData('goals')
+        .then((data) => {
+          console.log(data);
+        })
+        .catch((error) => {
+          console.error('Error fetching data:', error);
+        });
+    });
+  };
+  const handleOpenModal = () => {
+    setIsOpenModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsOpenModal(false);
+  };
+
+  const handleTabClick = (index) => {
+    setActiveTab(index ? 'List' : 'Tree');
+  };
+
+  const prepareTreeObject = (goals) => {
+    const parentList = goals.filter((goal) => !goal.parentId);
+    const parentWithChild = [];
+    parentList.forEach((parent) => {
+      const childList = goals.filter((goal) => goal.parentId === parent.id);
+      parentWithChild.push({
+        ...parent,
+        childList,
+      });
+    });
+
+    setTreeData(parentWithChild);
+  };
 
   useEffect(() => {
     getData('goals')
@@ -27,35 +75,16 @@ const GoalList = () => {
       });
   }, []);
 
-  useEffect(() => {
-    console.log('treeData', treeData);
-  }, [treeData]);
-
-  const openModal = () => setIsModalOpen(true);
-  const closeModal = () => setIsModalOpen(false);
-
-  const prepareTreeObject = (goals) => {
-    const parentList = goals.filter((goal) => !goal.parentId);
-    let parentWithChild = [];
-    parentList.map((parent) => {
-      const childList = goals.filter((goal) => goal.parentId === parent.id);
-      parentWithChild.push({
-        ...parent,
-        childList,
-      });
-    });
-
-    setTreeData(parentWithChild);
-  };
-
   const findItemById = (id) => {
     const parent = treeData.find((item) => item.id === id);
     if (parent) {
       return parent;
     }
 
-    for (const parent of treeData) {
-      const child = parent.childList.find((child) => child.id === id);
+    for (const parentData of treeData) {
+      const child = parentData.childList.find(
+        (childData) => childData.id === id,
+      );
       if (child) {
         return child;
       }
@@ -137,53 +166,81 @@ const GoalList = () => {
     };
   });
 
-  return (
-    <div className="goalList">
-      <div className="goalHeader">
-        <h1>Goals</h1>
-        <Button text="New Goal" onClick={openModal} />
+  const renderGoalListItem = (data) => {
+    return (
+      <div key={data.id}>
+        <GoalListItem key={data.id} data={data} />
+        {data.childList &&
+          data.childList.length > 0 &&
+          data.childList.map((child) => renderGoalListItem(child))}
       </div>
-      <div className="goalContent">
-        <Tabs />
-        <div className="tabBody">
-          <ArcherContainer
-            strokeColor="black"
-            endShape={{
-              arrow: {
-                arrowThickness: 0,
-                arrowLength: 0,
-              },
-              circle: {
-                radius: 0,
-                fillColor: 'transparent',
-                strokeColor: 'transparent',
-                strokeWidth: 0,
-              },
-            }}
-            strokeWidth={1}
-          >
-            {structuredData.map((item, index) => (
-              <div key={index}>
-                <div className="parentTreeData">{item.parent}</div>
-                <div className="childTreeData">{item.children}</div>
-                {index !== structuredData.length - 1 && (
-                  <div className="divider"></div>
-                )}
-              </div>
-            ))}
-          </ArcherContainer>
+    );
+  };
+
+  return (
+    <>
+      <div className="goalList">
+        <div className="goalHeader">
+          <h1>Goals</h1>
+          <Button text="New Goal" onClick={handleOpenModal} />
+        </div>
+        <div className="goalContent">
+          <Tabs onTabClick={handleTabClick} />
+          <div className="tabBody">
+            {activeTab === 'Tree' ? (
+              <ArcherContainer
+                strokeColor="black"
+                endShape={{
+                  arrow: {
+                    arrowThickness: 0,
+                    arrowLength: 0,
+                  },
+                  circle: {
+                    radius: 0,
+                    fillColor: 'transparent',
+                    strokeColor: 'transparent',
+                    strokeWidth: 0,
+                  },
+                }}
+                strokeWidth={1}
+              >
+                {structuredData.map((item, index) => (
+                  <div key={index}>
+                    <div className="parentTreeData">
+                      {item.parent}
+                      {item.children && item.children.length > 0 && (
+                        <button
+                          className="treeItemButton"
+                          onClick={() => toggleChildVisibility(index)}
+                        >
+                          {visibleIndex === index ? <Collapse /> : <Expand />}
+                        </button>
+                      )}
+                    </div>
+                    {visibleIndex === index && (
+                      <div className="childTreeData">{item.children}</div>
+                    )}
+                    {index !== structuredData.length - 1 && <Divider />}
+                  </div>
+                ))}
+              </ArcherContainer>
+            ) : (
+              treeData.map((data) => renderGoalListItem(data))
+            )}
+          </div>
         </div>
       </div>
       <Modal
-        isOpen={isModalOpen}
-        onClose={closeModal}
-        title="Add new goal"
-        buttonText="Publish"
-      >
-        <FormInputFields />
-        <FormSelectionFields />
-      </Modal>
-    </div>
+        isOpen={isOpenModal}
+        closeModal={handleCloseModal}
+        modalContent={{
+          title: 'Add new goal',
+          buttonText: 'Publish',
+          children: <GoalForm />,
+        }}
+        buttonAction={submitFormData}
+      />
+    </>
   );
 };
 
