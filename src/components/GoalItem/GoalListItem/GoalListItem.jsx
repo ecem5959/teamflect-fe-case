@@ -1,21 +1,13 @@
 import './goalListItem.scss';
 import Organization from '../../Icons/Organization';
 import Line from '../../Icons/Line';
+import { formatDate } from '../../../helpers/helper';
 import { useContext } from 'react';
 import { UserContext } from '../../../contexts/UserContext';
 
 const GoalListItem = ({ data }) => {
   const { users } = useContext(UserContext);
   const selectedUser = users.find((user) => user.id === data.ownerId);
-
-  const formatDate = (dateString) => {
-    const date = new Date(dateString);
-    return date.toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'short',
-      day: '2-digit',
-    });
-  };
 
   return (
     <div className="listItem">

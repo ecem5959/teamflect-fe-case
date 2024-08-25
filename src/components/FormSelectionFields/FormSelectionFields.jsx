@@ -53,7 +53,9 @@ const FormSelectionFields = () => {
         onChange={(value) => handleInputChange('parentId', value.id)}
         value={selectedParent}
       />
-      <CustomSelect label="Progress" options={progress} />
+      {formData.progress && (
+        <CustomSelect label="Progress" options={progress} />
+      )}
     </div>
   );
 };

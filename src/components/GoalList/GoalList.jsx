@@ -9,7 +9,6 @@ import {
   DroppableContainer,
 } from '../DragAndDrop/DragAndDrop';
 import Divider from '../Divider/Divider';
-import GoalListItem from '../GoalItem/GoalListItem/GoalListItem';
 import Expand from '../Icons/Expand';
 import Collapse from '../Icons/Collapse';
 import GoalForm from '../GoalForm/GoalForm';
@@ -17,13 +16,15 @@ import { useFormContext } from '../../contexts/FormContext';
 import Modal from '../Modal/Modal';
 import { GoalContext } from '../../contexts/GoalContext';
 import GoalItem from '../GoalItem/GoalItem';
+import EmptyGoal from '../EmptyGoal/EmptyGoal';
+import toast from 'react-hot-toast';
 
 const GoalList = () => {
   const [activeTab, setActiveTab] = useState('Tree');
   const [visibleIndex, setVisibleIndex] = useState(null);
-  const { formData } = useFormContext();
+  const { formData, resetFormData, validateForm } = useFormContext();
   const [isOpenModal, setIsOpenModal] = useState(false);
-  const { setGoals, treeData } = useContext(GoalContext);
+  const { goals, setGoals, treeData } = useContext(GoalContext);
 
   const toggleChildVisibility = (index) => {
     setVisibleIndex(visibleIndex === index ? null : index);
@@ -34,21 +35,25 @@ const GoalList = () => {
   };
 
   const handleCloseModal = () => {
+    resetFormData();
     setIsOpenModal(false);
   };
 
   const submitFormData = () => {
-    postData('goals', formData).then(() => {
-      getData('goals')
-        .then((data) => {
-          setGoals(data);
-          handleCloseModal();
-          console.log(data);
-        })
-        .catch((error) => {
-          console.error('Error fetching data:', error);
-        });
-    });
+    if (validateForm()) {
+      postData('goals', formData).then(() => {
+        getData('goals')
+          .then((data) => {
+            setGoals(data);
+            handleCloseModal();
+            toast.success('Goal added');
+            console.log(data);
+          })
+          .catch((error) => {
+            console.error('Error fetching data:', error);
+          });
+      });
+    }
   };
 
   const handleTabClick = (index) => {
@@ -149,7 +154,6 @@ const GoalList = () => {
     return (
       <div key={data.id}>
         <GoalItem key={data.id} data={data} type="list" />
-        {/* <GoalListItem key={data.id} data={data} /> */}
         {data.childList &&
           data.childList.length > 0 &&
           data.childList.map((child) => renderGoalListItem(child))}
@@ -159,57 +163,61 @@ const GoalList = () => {
 
   return (
     <>
-      <div className="goalList">
-        <div className="goalHeader">
-          <h1>Goals</h1>
-          <Button text="New Goal" onClick={handleOpenModal} />
-        </div>
-        <div className="goalContent">
-          <Tabs onTabClick={handleTabClick} />
-          <div className="tabBody">
-            {activeTab === 'Tree' ? (
-              <ArcherContainer
-                strokeColor="black"
-                endShape={{
-                  arrow: {
-                    arrowThickness: 0,
-                    arrowLength: 0,
-                  },
-                  circle: {
-                    radius: 0,
-                    fillColor: 'transparent',
-                    strokeColor: 'transparent',
-                    strokeWidth: 0,
-                  },
-                }}
-                strokeWidth={1}
-              >
-                {structuredData.map((item, index) => (
-                  <div key={index}>
-                    <div className="parentTreeData">
-                      {item.parent}
-                      {item.children && item.children.length > 0 && (
-                        <button
-                          className="treeItemButton"
-                          onClick={() => toggleChildVisibility(index)}
-                        >
-                          {visibleIndex === index ? <Collapse /> : <Expand />}
-                        </button>
+      {goals.length === 0 ? (
+        <EmptyGoal buttonAction={handleOpenModal} />
+      ) : (
+        <div className="goalList">
+          <div className="goalHeader">
+            <h1>Goals</h1>
+            <Button text="New Goal" onClick={handleOpenModal} />
+          </div>
+          <div className="goalContent">
+            <Tabs onTabClick={handleTabClick} />
+            <div className="tabBody">
+              {activeTab === 'Tree' ? (
+                <ArcherContainer
+                  strokeColor="black"
+                  endShape={{
+                    arrow: {
+                      arrowThickness: 0,
+                      arrowLength: 0,
+                    },
+                    circle: {
+                      radius: 0,
+                      fillColor: 'transparent',
+                      strokeColor: 'transparent',
+                      strokeWidth: 0,
+                    },
+                  }}
+                  strokeWidth={1}
+                >
+                  {structuredData.map((item, index) => (
+                    <div key={index}>
+                      <div className="parentTreeData">
+                        {item.parent}
+                        {item.children && item.children.length > 0 && (
+                          <button
+                            className="treeItemButton"
+                            onClick={() => toggleChildVisibility(index)}
+                          >
+                            {visibleIndex === index ? <Collapse /> : <Expand />}
+                          </button>
+                        )}
+                      </div>
+                      {visibleIndex === index && (
+                        <div className="childTreeData">{item.children}</div>
                       )}
+                      {index !== structuredData.length - 1 && <Divider />}
                     </div>
-                    {visibleIndex === index && (
-                      <div className="childTreeData">{item.children}</div>
-                    )}
-                    {index !== structuredData.length - 1 && <Divider />}
-                  </div>
-                ))}
-              </ArcherContainer>
-            ) : (
-              treeData.map((data) => renderGoalListItem(data))
-            )}
+                  ))}
+                </ArcherContainer>
+              ) : (
+                treeData.map((data) => renderGoalListItem(data))
+              )}
+            </div>
           </div>
         </div>
-      </div>
+      )}
       <Modal
         isOpen={isOpenModal}
         closeModal={handleCloseModal}

@@ -47,6 +47,11 @@ const CustomSelect = ({
           )}
           <Arrow />
         </div>
+        {isOpen && options.length === 0 && (
+          <div className="optionList">
+            <span className="noOptionText">No data</span>
+          </div>
+        )}
         {isOpen && (
           <ul className="optionList">
             {options.map((option) => (

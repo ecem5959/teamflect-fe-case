@@ -1,7 +1,8 @@
 import NoGoal from '../Icons/NoGoal';
-import './emptyGoal.scss';
 import Button from '../Button/Button';
-const EmptyGoal = () => {
+import './emptyGoal.scss';
+
+const EmptyGoal = ({ buttonAction }) => {
   return (
     <div className="emptyGoal">
       <NoGoal />
@@ -11,7 +12,7 @@ const EmptyGoal = () => {
         Need help? Check out <u>how it works</u> for more tips or{' '}
         <u>send us a message</u>
       </p>
-      <Button text="New Goal" />
+      <Button text="New Goal" onClick={buttonAction} />
     </div>
   );
 };

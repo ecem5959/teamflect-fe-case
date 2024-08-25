@@ -9,28 +9,33 @@ import { GoalContext } from '../../contexts/GoalContext';
 import GoalListItem from './GoalListItem/GoalListItem';
 import GoalTreeItem from './GoalTreeItem/GoalTreeItem';
 import './goalItem.scss';
+import toast from 'react-hot-toast';
 
 const GoalItem = ({ data, type }) => {
-  const { formData } = useFormContext();
+  const { formData, resetFormData, validateForm } = useFormContext();
   const { setGoals } = useContext(GoalContext);
 
   const [isOpenModal, setIsOpenModal] = useState(false);
 
   const handleCloseModal = () => {
+    resetFormData();
     setIsOpenModal(false);
   };
 
   const updateFormData = () => {
-    putData(`goals/${data.id}`, formData).then(() => {
-      getData('goals')
-        .then((resp) => {
-          setGoals(resp);
-          handleCloseModal();
-        })
-        .catch((error) => {
-          console.error('Error fetching data:', error);
-        });
-    });
+    if (validateForm()) {
+      putData(`goals/${data.id}`, formData).then(() => {
+        getData('goals')
+          .then((resp) => {
+            setGoals(resp);
+            handleCloseModal();
+            toast.success('Goal updated');
+          })
+          .catch((error) => {
+            console.error('Error fetching data:', error);
+          });
+      });
+    }
   };
 
   const renderTooltip = () => {

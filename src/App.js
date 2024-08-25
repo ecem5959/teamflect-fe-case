@@ -9,6 +9,7 @@ import { HTML5Backend } from 'react-dnd-html5-backend';
 import { UserProvider } from './contexts/UserContext';
 import { GoalProvider } from './contexts/GoalContext';
 import { FormProvider } from './contexts/FormContext';
+import ToasterProvider from './providers/ToasterProvider';
 
 const App = () => {
   return (
@@ -21,6 +22,7 @@ const App = () => {
                 <Route path="/" element={<Home />} />
                 <Route path="/goals" element={<Goals />} />
               </Routes>
+              <ToasterProvider />
             </Layout>
           </DndProvider>
         </UserProvider>

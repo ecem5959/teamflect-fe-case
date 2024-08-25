@@ -2,17 +2,12 @@ import Organization from '../../Icons/Organization';
 import './goalTreeItem.scss';
 import { useContext } from 'react';
 import { UserContext } from '../../../contexts/UserContext';
+import { formatDate } from '../../../helpers/helper';
 
 const GoalTreeItem = ({ data }) => {
   const { users } = useContext(UserContext);
 
   const selectedUser = users.find((user) => user.id === data.ownerId);
-  const formatDate = (dateString) => {
-    const date = new Date(dateString);
-
-    const options = { month: 'short', day: 'numeric', year: 'numeric' };
-    return date.toLocaleDateString('en-US', options);
-  };
 
   return (
     <>

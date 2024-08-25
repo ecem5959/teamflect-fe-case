@@ -5,7 +5,7 @@ import CustomTextArea from '../CustomTextArea/CustomTextArea';
 import { useFormContext } from '../../contexts/FormContext';
 
 const FormInputFields = () => {
-  const { formData, handleInputChange } = useFormContext();
+  const { formData, handleInputChange, errors } = useFormContext();
 
   return (
     <div className="inputFields">
@@ -17,6 +17,7 @@ const FormInputFields = () => {
         <CustomInput
           value={formData.title || ''}
           onChange={(value) => handleInputChange('title', value)}
+          errors={errors}
         />
         <CustomTextArea
           value={formData.description || ''}

@@ -67,6 +67,13 @@
     display: none;
   }
 
+  .noOptionText{
+    display: block;
+    padding: 10px 16px;
+    color: #9a9a9a;
+    font-weight: 500;
+  }
+
   .optionListItem {
     display: flex;
     align-items: center;
