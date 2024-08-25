@@ -17,7 +17,20 @@ export const GoalProvider = ({ children }) => {
       });
   }, []);
 
-  const value = useMemo(() => ({ goals, setGoals }), [goals]);
+  const treeData = useMemo(() => {
+    if (!goals) return null;
+
+    const parentList = goals.filter((goal) => !goal.parentId);
+    return parentList.map((parent) => ({
+      ...parent,
+      childList: goals.filter((goal) => goal.parentId === parent.id),
+    }));
+  }, [goals]);
+
+  const value = useMemo(
+    () => ({ goals, setGoals, treeData }),
+    [goals, treeData],
+  );
 
   return <GoalContext.Provider value={value}>{children}</GoalContext.Provider>;
 };

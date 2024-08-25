@@ -18,6 +18,10 @@ const FormSelectionFields = () => {
   const { goals } = useContext(GoalContext);
 
   const parentGoals = goals.filter((goal) => !goal.parentId);
+  const selectedUser = users.find((user) => user.id === formData.ownerId);
+  const selectedParent = parentGoals.find(
+    (parentGoal) => parentGoal.id === formData.parentId,
+  );
 
   return (
     <div className="selectionFields">
@@ -26,7 +30,7 @@ const FormSelectionFields = () => {
         options={users}
         showImage
         onChange={(value) => handleInputChange('ownerId', value.id)}
-        value={formData.ownerId || ''}
+        value={selectedUser}
       />
       <div className="dateField">
         <span>Timeline</span>
@@ -34,12 +38,12 @@ const FormSelectionFields = () => {
           <CustomDateInput
             label="Start date"
             onChange={(value) => handleInputChange('startDate', value)}
-            value={formData.startDate || ''}
+            value={formData.startDate}
           />
           <CustomDateInput
             label="End date"
             onChange={(value) => handleInputChange('endDate', value)}
-            value={formData.endDate || ''}
+            value={formData.endDate}
           />
         </div>
       </div>
@@ -47,7 +51,7 @@ const FormSelectionFields = () => {
         label="Parent goal"
         options={parentGoals}
         onChange={(value) => handleInputChange('parentId', value.id)}
-        value={formData.parentId || ''}
+        value={selectedParent}
       />
       <CustomSelect label="Progress" options={progress} />
     </div>

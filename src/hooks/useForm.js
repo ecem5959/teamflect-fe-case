@@ -21,6 +21,7 @@ const useForm = () => {
 
   return {
     formData: memoizedFormData,
+    setFormData,
     handleInputChange,
   };
 };

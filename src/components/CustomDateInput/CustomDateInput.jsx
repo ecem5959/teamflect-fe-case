@@ -5,9 +5,6 @@ import './customDateInput.scss';
 import { useEffect, useState } from 'react';
 
 const CustomDateInput = ({ label, onChange, value }) => {
-  useEffect(() => {
-    console.log('value', value);
-  }, [value]);
   const [selectedDate, setSelectedDate] = useState(null);
   const formatDate = (date) => {
     if (!date) return '';
@@ -19,19 +16,16 @@ const CustomDateInput = ({ label, onChange, value }) => {
       })
       .replace(/ /g, ' ');
   };
-
-  useEffect(() => {
-    console.log('selectedDate', selectedDate);
-  }, [selectedDate]);
-
-  /* const formatDateV2 = (
-    dateString,
-    locale = 'en-US',
-    options = { day: 'numeric', month: 'short', year: 'numeric' },
-  ) => {
+  const formatDateV2 = (dateString) => {
     const date = new Date(dateString);
-    return new Intl.DateTimeFormat(locale, options).format(date);
-  }; */
+    return date
+      .toLocaleDateString('en-GB', {
+        day: '2-digit',
+        month: 'short',
+        year: 'numeric',
+      })
+      .replace(/,/g, '');
+  };
 
   return (
     <div className="dateInputWrapper">
@@ -46,7 +40,7 @@ const CustomDateInput = ({ label, onChange, value }) => {
           dateFormat="d MMM yyyy"
           placeholderText={label}
           className="datePicker"
-          value={formatDate(selectedDate)}
+          value={value ? formatDateV2(value) : formatDate(selectedDate)}
         />
         <Calendar />
       </div>

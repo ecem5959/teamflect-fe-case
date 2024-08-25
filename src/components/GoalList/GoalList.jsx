@@ -1,7 +1,7 @@
 import Button from '../Button/Button';
 import Tabs from '../Tabs/Tabs';
 import './goalList.scss';
-import { useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import { getData, postData, putData } from '../../services/fetch';
 import { ArcherContainer, ArcherElement } from 'react-archer';
 import {
@@ -15,29 +15,19 @@ import Collapse from '../Icons/Collapse';
 import GoalForm from '../GoalForm/GoalForm';
 import { useFormContext } from '../../contexts/FormContext';
 import Modal from '../Modal/Modal';
+import { GoalContext } from '../../contexts/GoalContext';
 
 const GoalList = () => {
-  const [treeData, setTreeData] = useState([]);
   const [activeTab, setActiveTab] = useState('Tree');
   const [visibleIndex, setVisibleIndex] = useState(null);
   const { formData } = useFormContext();
   const [isOpenModal, setIsOpenModal] = useState(false);
+  const { setGoals, treeData } = useContext(GoalContext);
 
   const toggleChildVisibility = (index) => {
     setVisibleIndex(visibleIndex === index ? null : index);
   };
 
-  const submitFormData = () => {
-    postData('goals', formData).then(() => {
-      getData('goals')
-        .then((data) => {
-          console.log(data);
-        })
-        .catch((error) => {
-          console.error('Error fetching data:', error);
-        });
-    });
-  };
   const handleOpenModal = () => {
     setIsOpenModal(true);
   };
@@ -46,34 +36,23 @@ const GoalList = () => {
     setIsOpenModal(false);
   };
 
+  const submitFormData = () => {
+    postData('goals', formData).then(() => {
+      getData('goals')
+        .then((data) => {
+          setGoals(data);
+          handleCloseModal();
+          console.log(data);
+        })
+        .catch((error) => {
+          console.error('Error fetching data:', error);
+        });
+    });
+  };
+
   const handleTabClick = (index) => {
     setActiveTab(index ? 'List' : 'Tree');
   };
-
-  const prepareTreeObject = (goals) => {
-    const parentList = goals.filter((goal) => !goal.parentId);
-    const parentWithChild = [];
-    parentList.forEach((parent) => {
-      const childList = goals.filter((goal) => goal.parentId === parent.id);
-      parentWithChild.push({
-        ...parent,
-        childList,
-      });
-    });
-
-    setTreeData(parentWithChild);
-  };
-
-  useEffect(() => {
-    getData('goals')
-      .then((data) => {
-        prepareTreeObject(data);
-        console.log(data);
-      })
-      .catch((error) => {
-        console.error('Error fetching data:', error);
-      });
-  }, []);
 
   const findItemById = (id) => {
     const parent = treeData.find((item) => item.id === id);
@@ -108,8 +87,7 @@ const GoalList = () => {
     }).then(() => {
       getData('goals')
         .then((data) => {
-          prepareTreeObject(data);
-          console.log(data);
+          setGoals(data);
         })
         .catch((error) => {
           console.error('Error fetching data:', error);
