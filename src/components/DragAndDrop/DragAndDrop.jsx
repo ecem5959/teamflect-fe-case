@@ -1,5 +1,6 @@
 import { useDrag, useDrop } from 'react-dnd';
-import GoalTreeItem from '../GoalTreeItem/GoalTreeItem';
+import GoalTreeItem from '../GoalItem/GoalTreeItem/GoalTreeItem';
+import GoalItem from '../GoalItem/GoalItem';
 
 const ItemType = 'TREE_ITEM';
 
@@ -11,7 +12,8 @@ export const DraggableGoalTreeItem = ({ data, index, type }) => {
 
   return (
     <div ref={ref}>
-      <GoalTreeItem data={data} />
+      {/* <GoalTreeItem data={data} /> */}
+      <GoalItem data={data} type="tree" />
     </div>
   );
 };

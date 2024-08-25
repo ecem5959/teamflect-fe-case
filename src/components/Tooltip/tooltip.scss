@@ -1,6 +1,8 @@
 .tooltipContainer {
-  position: relative;
+  position: absolute;
   display: inline-block;
+  top: 20px;
+  right: 26px;
 
   .tooltipContent {
     position: absolute;

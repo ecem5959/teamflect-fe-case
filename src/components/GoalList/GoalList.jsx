@@ -9,13 +9,14 @@ import {
   DroppableContainer,
 } from '../DragAndDrop/DragAndDrop';
 import Divider from '../Divider/Divider';
-import GoalListItem from '../GoalListItem/GoalListItem';
+import GoalListItem from '../GoalItem/GoalListItem/GoalListItem';
 import Expand from '../Icons/Expand';
 import Collapse from '../Icons/Collapse';
 import GoalForm from '../GoalForm/GoalForm';
 import { useFormContext } from '../../contexts/FormContext';
 import Modal from '../Modal/Modal';
 import { GoalContext } from '../../contexts/GoalContext';
+import GoalItem from '../GoalItem/GoalItem';
 
 const GoalList = () => {
   const [activeTab, setActiveTab] = useState('Tree');
@@ -147,7 +148,8 @@ const GoalList = () => {
   const renderGoalListItem = (data) => {
     return (
       <div key={data.id}>
-        <GoalListItem key={data.id} data={data} />
+        <GoalItem key={data.id} data={data} type="list" />
+        {/* <GoalListItem key={data.id} data={data} /> */}
         {data.childList &&
           data.childList.length > 0 &&
           data.childList.map((child) => renderGoalListItem(child))}
