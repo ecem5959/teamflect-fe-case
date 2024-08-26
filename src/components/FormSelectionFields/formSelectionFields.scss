@@ -24,3 +24,14 @@
     }
   }
 }
+
+@media (max-width: 630px){
+  .selectionFields{
+    .dateField{
+      .container{
+        flex-direction: column;
+        gap: 15px;
+      }
+    }
+  }
+}

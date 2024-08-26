@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import Arrow from '../Icons/Arrow';
 import './customSelect.scss';
+import useOutsideClick from '../../hooks/useOutsideClick';
 
 const CustomSelect = ({
   label,
@@ -11,6 +12,9 @@ const CustomSelect = ({
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState(value);
+  const optionListRef = useRef(null);
+
+  useOutsideClick(optionListRef, () => setIsOpen(false));
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
@@ -24,10 +28,7 @@ const CustomSelect = ({
   return (
     <div className="customSelectWrapper">
       <label className="customSelectLabel">{label}</label>
-      <div
-        className={`select ${isOpen ? 'open' : ''}`}
-        onClick={toggleDropdown}
-      >
+      <div className="select" onClick={toggleDropdown}>
         <div className="customSelectHeader">
           {selectedOption ? (
             <div className="selected">
@@ -53,7 +54,7 @@ const CustomSelect = ({
           </div>
         )}
         {isOpen && (
-          <ul className="optionList">
+          <ul className="optionList" ref={optionListRef}>
             {options.map((option) => (
               <li key={option.id}>
                 <button

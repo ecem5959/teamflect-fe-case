@@ -100,3 +100,15 @@
     margin-right: 8px;
   }
 }
+
+@media (max-width: 630px){
+  .optionList{
+    .optionListItem{
+      span{
+        font-size: 12px;
+        text-align: left;
+        line-height: 14px;
+      }
+    }
+  }
+}

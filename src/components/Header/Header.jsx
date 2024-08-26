@@ -5,7 +5,7 @@ import './header.scss';
 const Header = () => {
   return (
     <div className="header">
-      <img src="/Logo.png" alt="logo" width={141} height={34} />
+      <img src="/assets/logo.png" alt="logo" width={141} height={34} />
       <div className="settings">
         <Help />
         <Settings />

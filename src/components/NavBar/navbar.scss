@@ -1,7 +1,6 @@
 .navBar {
   min-width: 236px;
-  height: calc(100vh - 66px);
-  box-shadow: 1px 0 0 0 rgba(239, 241, 245, 1);
+  border-right: 1px solid #eff1f5;
   padding-top: 16px;
   background-color: #ffffff;
 
@@ -23,6 +22,17 @@
       &.active {
         color: #1053ff;
         font-weight: bold;
+      }
+    }
+  }
+}
+
+@media (max-width: 860px){
+  .navBar{
+    min-width: 78px;
+    &Item{
+      span{
+        display: none;
       }
     }
   }

@@ -32,6 +32,7 @@
         display: flex;
         width: 100%;
         justify-content: center;
+        flex: 0 0 312px;
       }
 
       .parentTreeData {
@@ -67,10 +68,20 @@
 
       .childTreeData {
         display: flex;
-        padding: 60px 0;
+        padding: 60px 0 20px;
         gap: 20px;
         width: 100%;
+        justify-content: center;
+        overflow: auto;
       }
     }
   }
 }
+
+@media (max-width: 860px){
+  .goalList{
+    width: calc(100% - 78px);
+  }
+}
+
+

@@ -46,7 +46,7 @@ const GoalList = () => {
           .then((data) => {
             setGoals(data);
             handleCloseModal();
-            toast.success('Goal added');
+            toast.success('Goal added.');
             console.log(data);
           })
           .catch((error) => {
@@ -87,18 +87,24 @@ const GoalList = () => {
     const draggedData = findItemById(draggedId);
     console.log('draggedData', draggedData);
 
-    putData(`goals/${draggedId}`, {
-      ...draggedData,
-      parentId: targetId,
-    }).then(() => {
-      getData('goals')
-        .then((data) => {
-          setGoals(data);
-        })
-        .catch((error) => {
-          console.error('Error fetching data:', error);
-        });
-    });
+    if (
+      (draggedType === 'child' && targetType === 'parent') ||
+      (draggedType === 'parent' && targetType === 'parent')
+    ) {
+      putData(`goals/${draggedId}`, {
+        ...draggedData,
+        parentId: targetId,
+      }).then(() => {
+        getData('goals')
+          .then((data) => {
+            setGoals(data);
+            toast.success('Goal updated.');
+          })
+          .catch((error) => {
+            console.error('Error fetching data:', error);
+          });
+      });
+    }
   };
 
   const structuredData = treeData.map((parent, parentIndex) => {

@@ -5,6 +5,7 @@
   box-shadow: 0 1px 6px 0 rgba(35, 48, 67, 0.1);
   display: flex;
   justify-content: space-between;
+  margin-bottom: 20px;
 
   &Left {
     display: flex;
@@ -80,6 +81,16 @@
       background: #c1d3fe;
       border-radius: 42px;
       padding: 4px 9px;
+    }
+  }
+}
+
+@media (max-width: 860px){
+  .listItem{
+    flex-direction: column;
+    gap: 15px;
+    .listItemRight{
+      padding-left: 40px;
     }
   }
 }
