@@ -47,7 +47,6 @@ const GoalList = () => {
             setGoals(data);
             handleCloseModal();
             toast.success('Goal added.');
-            console.log(data);
           })
           .catch((error) => {
             console.error('Error fetching data:', error);
@@ -61,31 +60,24 @@ const GoalList = () => {
   };
 
   const findItemById = (id) => {
-    const parent = treeData.find((item) => item.id === id);
-    if (parent) {
-      return parent;
+    let foundItem = treeData.find((item) => item.id === id);
+    if (foundItem) {
+      return foundItem;
     }
 
-    for (const parentData of treeData) {
-      const child = parentData.childList.find(
-        (childData) => childData.id === id,
-      );
-      if (child) {
-        return child;
+    treeData.forEach((parentData) => {
+      if (!foundItem) {
+        foundItem = parentData.childList.find(
+          (childData) => childData.id === id,
+        );
       }
-    }
+    });
 
-    return null;
+    return foundItem || null;
   };
 
   const moveItem = (draggedId, targetId, draggedType, targetType) => {
-    console.log('draggedId:', draggedId);
-    console.log('targetId:', targetId);
-    console.log('draggedType:', draggedType);
-    console.log('targetType:', targetType);
-
     const draggedData = findItemById(draggedId);
-    console.log('draggedData', draggedData);
 
     if (
       (draggedType === 'child' && targetType === 'parent') ||

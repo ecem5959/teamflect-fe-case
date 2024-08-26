@@ -10,7 +10,6 @@ export const UserProvider = ({ children }) => {
     getData('users')
       .then((data) => {
         setUsers(data);
-        console.log('users', data);
       })
       .catch((error) => {
         console.error('Error fetching data:', error);

@@ -10,7 +10,6 @@ export const GoalProvider = ({ children }) => {
     getData('goals')
       .then((data) => {
         setGoals(data);
-        console.log('goals', data);
       })
       .catch((error) => {
         console.error('Error fetching data:', error);

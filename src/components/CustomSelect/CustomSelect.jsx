@@ -27,7 +27,7 @@ const CustomSelect = ({
 
   return (
     <div className="customSelectWrapper">
-      <label className="customSelectLabel">{label}</label>
+      <div className="customSelectLabel">{label}</div>
       <div className="select" onClick={toggleDropdown}>
         <div className="customSelectHeader">
           {selectedOption ? (

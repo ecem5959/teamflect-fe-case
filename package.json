@@ -2,7 +2,7 @@
   "name": "teamflect-fe-case",
   "version": "1.0.0",
   "description": "Welcome to the Goal CRUD Application coding challenge! The objective of this challenge is to create a goal management application with the following features and requirements.",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
     "start": "webpack-dev-server",
     "build": "Webpack .",
