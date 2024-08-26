@@ -1,35 +1,12 @@
-import { createContext, useState, useMemo, useEffect } from 'react';
-import { getData } from '../services/fetch';
+import { createContext, useContext } from 'react';
+import useGoal from '../hooks/useGoals';
 
-export const GoalContext = createContext({});
+const GoalContext = createContext({});
 
 export const GoalProvider = ({ children }) => {
-  const [goals, setGoals] = useState(null);
+  const goal = useGoal();
 
-  useEffect(() => {
-    getData('goals')
-      .then((data) => {
-        setGoals(data);
-      })
-      .catch((error) => {
-        console.error('Error fetching data:', error);
-      });
-  }, []);
-
-  const treeData = useMemo(() => {
-    if (!goals) return null;
-
-    const parentList = goals.filter((goal) => !goal.parentId);
-    return parentList.map((parent) => ({
-      ...parent,
-      childList: goals.filter((goal) => goal.parentId === parent.id),
-    }));
-  }, [goals]);
-
-  const value = useMemo(
-    () => ({ goals, setGoals, treeData }),
-    [goals, treeData],
-  );
-
-  return <GoalContext.Provider value={value}>{children}</GoalContext.Provider>;
+  return <GoalContext.Provider value={goal}>{children}</GoalContext.Provider>;
 };
+
+export const useGoalContext = () => useContext(GoalContext);

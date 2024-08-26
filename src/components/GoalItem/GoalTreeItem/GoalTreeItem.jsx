@@ -1,11 +1,10 @@
 import Organization from '../../Icons/Organization';
 import './goalTreeItem.scss';
-import { useContext } from 'react';
-import { UserContext } from '../../../contexts/UserContext';
+import { useUserContext } from '../../../contexts/UserContext';
 import { formatDate } from '../../../helpers/helper';
 
 const GoalTreeItem = ({ data }) => {
-  const { users } = useContext(UserContext);
+  const { users } = useUserContext();
 
   const selectedUser = users.find((user) => user.id === data.ownerId);
 

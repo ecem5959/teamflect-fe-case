@@ -1,7 +1,6 @@
 import Button from '../Button/Button';
 import Tabs from '../Tabs/Tabs';
-import './goalList.scss';
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import { getData, postData, putData } from '../../services/fetch';
 import { ArcherContainer, ArcherElement } from 'react-archer';
 import {
@@ -14,17 +13,18 @@ import Collapse from '../Icons/Collapse';
 import GoalForm from '../GoalForm/GoalForm';
 import { useFormContext } from '../../contexts/FormContext';
 import Modal from '../Modal/Modal';
-import { GoalContext } from '../../contexts/GoalContext';
+import { useGoalContext } from '../../contexts/GoalContext';
 import GoalItem from '../GoalItem/GoalItem';
 import EmptyGoal from '../EmptyGoal/EmptyGoal';
 import toast from 'react-hot-toast';
+import './goalList.scss';
 
 const GoalList = () => {
   const [activeTab, setActiveTab] = useState('Tree');
   const [visibleIndex, setVisibleIndex] = useState(null);
   const { formData, resetFormData, validateForm } = useFormContext();
   const [isOpenModal, setIsOpenModal] = useState(false);
-  const { goals, setGoals, treeData } = useContext(GoalContext);
+  const { goals, setGoals, treeData } = useGoalContext();
 
   const toggleChildVisibility = (index) => {
     setVisibleIndex(visibleIndex === index ? null : index);

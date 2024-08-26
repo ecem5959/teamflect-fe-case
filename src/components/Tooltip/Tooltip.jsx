@@ -1,12 +1,11 @@
 import './tooltip.scss';
 import { deleteData, getData } from '../../services/fetch';
-import { useContext } from 'react';
-import { GoalContext } from '../../contexts/GoalContext';
+import { useGoalContext } from '../../contexts/GoalContext';
 import { useFormContext } from '../../contexts/FormContext';
 import toast from 'react-hot-toast';
 
 const Tooltip = ({ icon, id, editAction }) => {
-  const { goals, setGoals } = useContext(GoalContext);
+  const { goals, setGoals } = useGoalContext();
   const { formData, setFormData } = useFormContext();
 
   const handleEdit = () => {

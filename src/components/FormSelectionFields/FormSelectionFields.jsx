@@ -1,9 +1,8 @@
 import './formSelectionFields.scss';
 import CustomSelect from '../CustomSelect/CustomSelect';
 import CustomDateInput from '../CustomDateInput/CustomDateInput';
-import { UserContext } from '../../contexts/UserContext';
-import { useContext } from 'react';
-import { GoalContext } from '../../contexts/GoalContext';
+import { useUserContext } from '../../contexts/UserContext';
+import { useGoalContext } from '../../contexts/GoalContext';
 import { useFormContext } from '../../contexts/FormContext';
 
 const progress = [
@@ -14,8 +13,8 @@ const progress = [
 
 const FormSelectionFields = () => {
   const { formData, handleInputChange } = useFormContext();
-  const { users } = useContext(UserContext);
-  const { goals } = useContext(GoalContext);
+  const { users } = useUserContext();
+  const { goals } = useGoalContext();
 
   const parentGoals = goals.filter((goal) => !goal.parentId);
   const selectedUser = users.find((user) => user.id === formData.ownerId);

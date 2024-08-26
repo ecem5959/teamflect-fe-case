@@ -1,22 +1,12 @@
-import { createContext, useState, useMemo, useEffect } from 'react';
-import { getData } from '../services/fetch';
+import { createContext, useContext } from 'react';
+import useUsers from '../hooks/useUsers';
 
-export const UserContext = createContext({});
+const UserContext = createContext({});
 
 export const UserProvider = ({ children }) => {
-  const [users, setUsers] = useState(null);
+  const user = useUsers();
 
-  useEffect(() => {
-    getData('users')
-      .then((data) => {
-        setUsers(data);
-      })
-      .catch((error) => {
-        console.error('Error fetching data:', error);
-      });
-  }, []);
-
-  const value = useMemo(() => ({ users, setUsers }), [users]);
-
-  return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
+  return <UserContext.Provider value={user}>{children}</UserContext.Provider>;
 };
+
+export const useUserContext = () => useContext(UserContext);

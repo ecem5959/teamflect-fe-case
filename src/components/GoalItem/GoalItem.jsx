@@ -1,11 +1,11 @@
 import MoreAction from '../Icons/MoreAction';
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import Tooltip from '../Tooltip/Tooltip';
 import GoalForm from '../GoalForm/GoalForm';
 import Modal from '../Modal/Modal';
 import { getData, putData } from '../../services/fetch';
 import { useFormContext } from '../../contexts/FormContext';
-import { GoalContext } from '../../contexts/GoalContext';
+import { useGoalContext } from '../../contexts/GoalContext';
 import GoalListItem from './GoalListItem/GoalListItem';
 import GoalTreeItem from './GoalTreeItem/GoalTreeItem';
 import './goalItem.scss';
@@ -13,7 +13,7 @@ import toast from 'react-hot-toast';
 
 const GoalItem = ({ data, type }) => {
   const { formData, resetFormData, validateForm } = useFormContext();
-  const { setGoals } = useContext(GoalContext);
+  const { setGoals } = useGoalContext();
 
   const [isOpenModal, setIsOpenModal] = useState(false);
 

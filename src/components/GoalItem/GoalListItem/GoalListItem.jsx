@@ -2,11 +2,10 @@ import './goalListItem.scss';
 import Organization from '../../Icons/Organization';
 import Line from '../../Icons/Line';
 import { formatDate } from '../../../helpers/helper';
-import { useContext } from 'react';
-import { UserContext } from '../../../contexts/UserContext';
+import { useUserContext } from '../../../contexts/UserContext';
 
 const GoalListItem = ({ data }) => {
-  const { users } = useContext(UserContext);
+  const { users } = useUserContext();
   const selectedUser = users.find((user) => user.id === data.ownerId);
 
   return (
