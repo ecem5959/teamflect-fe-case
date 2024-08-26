@@ -41,7 +41,11 @@ const GoalList = () => {
 
   const submitFormData = () => {
     if (validateForm()) {
-      postData('goals', formData).then(() => {
+      const { parentId, ...restFormData } = formData;
+      const dataToSend = parentId
+        ? { parentId, ...restFormData }
+        : restFormData;
+      postData('goals', dataToSend).then(() => {
         getData('goals')
           .then((data) => {
             setGoals(data);
@@ -78,7 +82,6 @@ const GoalList = () => {
 
   const moveItem = (draggedId, targetId, draggedType, targetType) => {
     const draggedData = findItemById(draggedId);
-
     if (
       (draggedType === 'child' && targetType === 'parent') ||
       (draggedType === 'parent' && targetType === 'parent')
@@ -122,6 +125,7 @@ const GoalList = () => {
                 data={parent}
                 index={parentIndex}
                 moveItem={moveItem}
+                type="parent"
               />
             </div>
           </ArcherElement>

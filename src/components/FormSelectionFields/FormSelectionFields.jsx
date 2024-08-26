@@ -16,7 +16,9 @@ const FormSelectionFields = () => {
   const { users } = useUserContext();
   const { goals } = useGoalContext();
 
-  const parentGoals = goals.filter((goal) => !goal.parentId);
+  const parentGoals = goals.filter(
+    (goal) => !goal.parentId && goal.id !== formData.id,
+  );
   const selectedUser = users.find((user) => user.id === formData.ownerId);
   const selectedParent = parentGoals.find(
     (parentGoal) => parentGoal.id === formData.parentId,
