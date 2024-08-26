@@ -22,7 +22,9 @@ const GoalTreeItem = ({ data }) => {
       </div>
       <div className="treeItemContent">{data.title}</div>
       <div className="treeItemBottom">
-        <div className="date">Ends on {formatDate(data.endDate)}</div>
+        <div className="date">
+          {data.endDate ? `Ends on ${formatDate(data.endDate)}` : ''}
+        </div>
         <img
           src={selectedUser?.img}
           alt={selectedUser?.displayName}

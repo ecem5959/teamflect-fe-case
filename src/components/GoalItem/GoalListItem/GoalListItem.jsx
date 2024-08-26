@@ -25,7 +25,9 @@ const GoalListItem = ({ data }) => {
         </div>
       </div>
       <div className="listItemRight">
-        <div className="date">{formatDate(data.endDate)}</div>
+        <div className="date">
+          {data.endDate ? `${formatDate(data.endDate)}` : ''}
+        </div>
         <div className="progress">
           <span>{data?.progress || 0}%</span>
           <div className="progressBar">
