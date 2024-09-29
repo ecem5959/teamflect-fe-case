@@ -5,12 +5,6 @@ import { useUserContext } from '../../contexts/UserContext';
 import { useGoalContext } from '../../contexts/GoalContext';
 import { useFormContext } from '../../contexts/FormContext';
 
-const progress = [
-  { id: 11, displayName: '%30' },
-  { id: 21, displayName: '%50' },
-  { id: 31, displayName: '%70' },
-];
-
 const FormSelectionFields = () => {
   const { formData, handleInputChange } = useFormContext();
   const { users } = useUserContext();
@@ -54,9 +48,6 @@ const FormSelectionFields = () => {
         onChange={(value) => handleInputChange('parentId', value.id)}
         value={selectedParent}
       />
-      {formData.progress && (
-        <CustomSelect label="Progress" options={progress} />
-      )}
     </div>
   );
 };

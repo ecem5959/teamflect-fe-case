@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { getData } from '../services/fetch';
 
 const useGoal = () => {
-  const [goals, setGoals] = useState(null);
+  const [goals, setGoals] = useState([]);
 
   useEffect(() => {
     getData('goals')
